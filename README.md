@@ -1,6 +1,6 @@
 # Python UV Setup
 
-![Latest Release](https://img.shields.io/github/v/release/p6m-actions/python-uv-setup?style=flat-square&label=Latest%20Release&color=purple)
+![Latest Release](https://img.shields.io/github/v/release/p6m-actions/python-uv-setup?style=flat-square&label=Latest%20Release&color=blue)
 
 ## Description
 
@@ -26,16 +26,16 @@ Add the following step to your GitHub Actions workflow:
 
 ## Inputs
 
-| Input          | Required | Default | Description                                          |
-| -------------- | -------- | ------- | ---------------------------------------------------- |
-| version        | false    | latest  | Specific version of UV to install (e.g. '0.4.29')   |
+| Input          | Required | Default | Description                                        |
+| -------------- | -------- | ------- | -------------------------------------------------- |
+| version        | false    | latest  | Specific version of UV to install (e.g. '0.4.29')  |
 | python-version | false    |         | Version of Python to install (e.g. '3.11', '3.12') |
 
 ## Outputs
 
 | Output         | Description                                     |
 | -------------- | ----------------------------------------------- |
-| version        | The actual version of UV that was installed    |
+| version        | The actual version of UV that was installed     |
 | python-version | The actual version of Python that was installed |
 
 ## Examples
@@ -73,20 +73,20 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.9", "3.10", "3.11", "3.12"]
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: p6m-actions/python-uv-setup@v1
         with:
           python-version: ${{ matrix.python-version }}
-      
+
       - name: Install dependencies
         run: uv sync
-      
+
       - name: Run tests
         run: uv run pytest
-      
+
       - name: Run linting
         run: uv run ruff check
 ```
@@ -96,16 +96,16 @@ Using with caching for faster builds:
 ```yaml
 steps:
   - uses: actions/checkout@v4
-  
+
   - uses: p6m-actions/python-uv-setup@v1
     with:
       version: "0.4.29"
       python-version: "3.11"
-  
+
   # Cache is automatically handled by the action
   - name: Install dependencies
     run: uv sync
-  
+
   - name: Build package
     run: uv build
 ```
